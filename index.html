@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+        <meta name="description" content="PWA of gmail" />
+        <meta name="keywords" content="crypt,cryption,censor,china,gfw" />
+
+        <!-- web app -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+
+        <!-- theme color-->
+        <meta
+            name="theme-color"
+            content="#ffffff"
+            media="(prefers-color-scheme: light)"
+        />
+        <meta
+            name="theme-color"
+            content="#000000"
+            media="(prefers-color-scheme: dark)"
+        />
+
+        <!-- fav icon -->
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+
+        <!-- apple-touch-icon -->
+        <link rel="/favicon.svg" type="image/svg+xml" />
+
+        <title>gmail</title>
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                background-color: #ffffff;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="tips" hidden="true">
+            <h1>Please add this to the home screen of your device.</h1>
+            <h1>And reload this page to use.</h1>
+        </div>
+        <script>
+            console.log(localStorage.getItem("isReload") == "true");
+            if (localStorage.getItem("isReload") == "true") {
+                console.log("页面被刷新");
+                console.log(navigator.userAgent);
+                var os = (function () {
+                    var ua = navigator.userAgent,
+                        isWindowsPhone = /(?:Windows Phone)/.test(ua),
+                        isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+                        isAndroid = /(?:Android)/.test(ua),
+                        isFireFox = /(?:Firefox)/.test(ua),
+                        isChrome = /(?:Chrome|CriOS)/.test(ua),
+                        isTablet =
+                            /(?:iPad|PlayBook)/.test(ua) ||
+                            (isAndroid && !/(?:Mobile)/.test(ua)) ||
+                            (isFireFox && /(?:Tablet)/.test(ua)),
+                        isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+                        isPc = !isPhone && !isAndroid && !isSymbian;
+                    return {
+                        isTablet: isTablet,
+                        isPhone: isPhone,
+                        isAndroid: isAndroid,
+                        isPc: isPc
+                    };
+                })();
+
+                if (os.isAndroid || os.isPhone) {
+                    location.href = "https://mail.google.com/";
+                } else if (os.isTablet) {
+                    location.href = "https://mail.google.com/";
+                } else if (os.isPc) {
+                    location.href = "https://mail.google.com/";
+                }
+            } else {
+                document.getElementById("tips").hidden = false;
+                console.log("首次被加载");
+                localStorage.setItem("isReload", "true");
+            }
+        </script>
+    </body>
+</html>
